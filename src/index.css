@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Pretendard', '맑은 고딕', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    background-color: #f2f6fb;
+    color: #1f2937;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* 폼 입력창/셀렉트 공통 포커스 스타일 */
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: #1f3a6e;
+  box-shadow: 0 0 0 3px rgba(59, 130, 196, 0.25);
+}
+
+/* 카드 기본 스타일: 둥근 모서리 14px, 부드러운 그림자 */
+.app-card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(31, 58, 110, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+

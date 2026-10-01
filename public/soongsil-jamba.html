@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>숭실 잠바 공구 - 숭실대학교 잠바 공동구매 플랫폼</title>
+  <meta name="description" content="우리 소속의 잠바, 함께 모아 더 저렴하게 - 숭실대학교 잠바 공동구매" />
+  <!-- 웹 폰트: Pretendard -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <style>
+    /* ==========================================================================
+       [전체 디자인 CSS]
+       - 배경: 연한 하늘색 #f2f6fb
+       - 메인 네이비: #1f3a6e
+       - 포인트 스카이블루: #3b82c4
+       - 폰트: 'Pretendard', '맑은 고딕', sans-serif
+       - 카드형 UI: 둥근 모서리 14px, 부드러운 그림자
+       - 최대 너비 560px, 가운데 정렬 (모바일 우선, 반응형)
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', '맑은 고딕', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background-color: #f2f6fb;
+      color: #1e293b;
+      line-height: 1.5;
+      padding: 24px 16px;
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 페이지 상단 헤더 */
+    .header {
+      text-align: center;
+      padding-top: 8px;
+      padding-bottom: 4px;
+    }
+
+    .header .logo {
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1f3a6e;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #475569;
+      font-weight: 500;
+    }
+
+    /* 카드형 UI (흰색 카드, 둥근 모서리 14px, 부드러운 그림자) */
+    .card {
+      background-color: #ffffff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 18px rgba(31, 58, 110, 0.08);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+    }
+
+    /* 단계 헤더 (1~4) */
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .step-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #1f3a6e;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1f3a6e;
+    }
+
+    /* 폼 입력칸 및 셀렉트: 너비 100%, 패딩 10px, 둥근 모서리 8px */
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 5px;
+    }
+
+    .req {
+      color: #ef4444;
+      font-weight: bold;
+    }
+
+    .sub-label {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: normal;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background-color: #ffffff;
+      color: #1e293b;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* 포커스 시: 테두리 네이비 + 연한 파랑 그림자 */
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #1f3a6e;
+      box-shadow: 0 0 0 3px rgba(59, 130, 196, 0.25);
+    }
+
+    /* 3단계 연동 드롭다운 그리드 */
+    .dropdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 480px) {
+      .dropdown-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 공동구매 현황 박스 */
+    .progress-box {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .badge-confirmed {
+      background-color: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background-color: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    /* 진행률 바: 포인트 스카이블루 (#3b82c4) */
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #3b82c4;
+      border-radius: 999px;
+      transition: width 0.4s ease-out;
+    }
+
+    .progress-subtext {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 5px;
+    }
+
+    /* 디자인 미리보기 일러스트 컨테이너 */
+    .preview-container {
+      width: 100%;
+      background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preview-svg-wrapper {
+      width: 100%;
+      max-width: 380px;
+      height: 240px;
+    }
+
+    .preview-svg-wrapper svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .preview-meta {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 8px;
+    }
+
+    .preview-meta strong {
+      color: #1e293b;
+    }
+
+    /* 라디오 / 체크박스 가로 배치 (gap 간격) */
+    .radio-group-horiz,
+    .checkbox-group-horiz {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .choice-card {
+      flex: 1;
+      min-width: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background-color: #ffffff;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      transition: all 0.2s;
+    }
+
+    .choice-card:hover {
+      border-color: #94a3b8;
+      background-color: #f8fafc;
+    }
+
+    .choice-card input[type="radio"],
+    .choice-card input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      cursor: pointer;
+      accent-color: #1f3a6e;
+    }
+
+    .choice-card.active {
+      border-color: #1f3a6e;
+      background-color: #f0f5fc;
+      color: #1f3a6e;
+      box-shadow: 0 0 0 1px #1f3a6e;
+    }
+
+    .size-card {
+      flex: 1;
+      min-width: 55px;
+      text-align: center;
+      padding: 10px 4px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      background-color: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .size-card.active {
+      background-color: #1f3a6e;
+      border-color: #1f3a6e;
+      color: #ffffff;
+    }
+
+    .size-card .delta {
+      display: block;
+      font-size: 10px;
+      font-weight: normal;
+      margin-top: 2px;
+      opacity: 0.85;
+    }
+
+    /* 수량 컨트롤러 */
+    .quantity-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .qty-buttons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .qty-btn:hover {
+      background-color: #f1f5f9;
+    }
+
+    .qty-input {
+      width: 48px !important;
+      text-align: center;
+      font-weight: bold;
+      padding: 6px !important;
+    }
+
+    /* 예상 금액 영역: 큰 글씨(24px), 네이비(#1f3a6e), 굵게, 가운데 정렬 */
+    .price-section {
+      text-align: center;
+      padding: 18px 0 12px 0;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 16px;
+    }
+
+    .price-label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+
+    .price-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: #1f3a6e;
+      letter-spacing: -0.5px;
+    }
+
+    /* 신청하기 버튼 & 다시 작성 버튼 */
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn-submit {
+      flex: 1;
+      padding: 13px 20px;
+      background-color: #1f3a6e; /* 네이비 배경 */
+      color: #ffffff; /* 흰색 글씨 */
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(31, 58, 110, 0.25);
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #2a4d8f; /* hover 시 약간 밝게 */
+    }
+
+    .btn-reset {
+      padding: 13px 18px;
+      background-color: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-reset:hover {
+      background-color: #e2e8f0;
+      color: #1e293b;
+    }
+
+    /* 에러 알림 박스 */
+    .error-box {
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* 신청 완료 메시지: 연두색 배경, 초록 글씨, 둥근 모서리 */
+    .success-card {
+      background-color: #eafaf1;
+      border: 1px solid #a3e9c0;
+      color: #1e7e34;
+      border-radius: 14px;
+      padding: 16px;
+      display: none;
+    }
+
+    .success-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .success-card p {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* 내 신청 내역 목록 */
+    .order-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .order-item {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    .order-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      color: #1f3a6e;
+      margin-bottom: 6px;
+    }
+
+    .order-item-price {
+      font-size: 14px;
+      color: #1f3a6e;
+      font-weight: 800;
+    }
+
+    .order-item-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      color: #64748b;
+      font-size: 11px;
+    }
+
+    .order-item-grid strong {
+      color: #334155;
+    }
+
+    .empty-orders {
+      text-align: center;
+      padding: 24px;
+      color: #94a3b8;
+      font-size: 12px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e1;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+      padding: 12px 0 24px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- ==================================================================== -->
+    <!-- [페이지 상단] 로고 이모지, 이름, 부제 -->
+    <!-- ==================================================================== -->
+    <header class="header">
+      <span class="logo" role="img" aria-label="잠바 이모지">🧥</span>
+      <h1>숭실 잠바 공구</h1>
+      <p>우리 소속의 잠바, 함께 모아 더 저렴하게</p>
+    </header>
+
+    <!-- 메인 신청서 폼 -->
+    <form id="jambaForm" novalidate>
+
+      <!-- ================================================================== -->
+      <!-- [1단계 카드] 소속 선택 및 실시간 디자인 미리보기 -->
+      <!-- ================================================================== -->
+      <section class="card">
+        <div class="step-header">
+          <span class="step-number">1</span>
+          <h2 class="step-title">소속 선택 & 디자인 미리보기</h2>
+        </div>
+
+        <!-- 소속 선택: 3단계 연동 드롭다운 (분류 → 소속 → 세부) -->
+        <div class="dropdown-grid">
+          <div class="form-group">
+            <label for="categorySelect">분류 <span class="req">*</span></label>
+            <select id="categorySelect">
+              <!-- JS 동적 주입 -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="groupSelect">소속 <span class="req">*</span></label>
+            <select id="groupSelect">
+              <!-- JS 동적 주입 -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="itemSelect">세부 <span class="req">*</span></label>
+            <select id="itemSelect">
+              <!-- JS 동적 주입 -->
+            </select>
+          </div>
+        </div>
+
+        <!-- 공동구매 현황: 진행률 바(스카이블루), 현재 인원/목표 인원 -->
+        <div class="progress-box">
+          <div class="progress-info">
+            <span id="progressAffiliationTitle">컴퓨터학부 공구 현황</span>
+            <span id="progressCountLabel">현재 23명 / 목표 30명</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="progressBarFill" class="progress-bar-fill" style="width: 76%;"></div>
+          </div>
+          <div class="progress-subtext">
+            <span id="progressPercentage">진행률 76%</span>
+            <span id="progressStatusText">목표까지 7명 남음</span>
+          </div>
+        </div>
+
+        <!-- 디자인 미리보기: CSS/SVG 잠바 일러스트 (몸통색, 소매색, 로고 문구 실시간 반영) -->
+        <div class="preview-container">
+          <div class="preview-svg-wrapper">
+            <svg id="jacketSvg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+                  <stop offset="100%" stop-color="#000000" stop-opacity="0.2" />
+                </linearGradient>
+              </defs>
+
+              <!-- 소매 그림자 -->
+              <ellipse cx="200" cy="275" rx="130" ry="12" fill="#000000" fill-opacity="0.08" />
+
+              <!-- 왼쪽 소매 (착용자 오른쪽) -->
+              <path id="leftSleeve" d="M 125,70 L 48,175 Q 35,190 52,202 L 92,165 L 126,145 Z" fill="#ffffff" stroke="#000" stroke-opacity="0.18" stroke-width="1.5" />
+              <!-- 왼쪽 손목 시보리 -->
+              <polygon id="leftRib" points="48,175 40,186 64,204 70,192" fill="#3b82c4" stroke="#ffffff" stroke-width="1" />
+
+              <!-- 오른쪽 소매 (착용자 왼쪽) -->
+              <path id="rightSleeve" d="M 275,70 L 352,175 Q 365,190 348,202 L 308,165 L 274,145 Z" fill="#ffffff" stroke="#000" stroke-opacity="0.18" stroke-width="1.5" />
+              <!-- 오른쪽 손목 시보리 -->
+              <polygon id="rightRib" points="352,175 360,186 336,204 330,192" fill="#3b82c4" stroke="#ffffff" stroke-width="1" />
+
+              <!-- 학번 자수 (옵션 선택 시 노출) -->
+              <g id="sidEmbroideryG" style="display: none;" transform="translate(76, 125) rotate(-22)">
+                <rect x="-14" y="-12" width="28" height="24" rx="4" fill="#ffffff" stroke="#1f3a6e" stroke-width="1.5" />
+                <text id="sidSvgText" x="0" y="5" fill="#1f3a6e" font-size="13" font-weight="900" text-anchor="middle">24</text>
+              </g>
+
+              <!-- 팔 로고 패치 (옵션 선택 시 노출) -->
+              <g id="patchG" style="display: none;" transform="translate(322, 125) rotate(22)">
+                <circle cx="0" cy="0" r="13" fill="#1f3a6e" stroke="#ffffff" stroke-width="1.5" />
+                <path d="M -6,5 L -3,-5 L 4,-6 L 6,1 L 2,6 Z" fill="#ffffff" />
+                <circle cx="0" cy="0" r="11" fill="none" stroke="#eab308" stroke-width="0.8" stroke-dasharray="1,1" />
+              </g>
+
+              <!-- 잠바 몸통 -->
+              <path id="jacketBody" d="M 125,70 Q 200,85 275,70 L 285,240 Q 200,248 115,240 Z" fill="#1a2e56" stroke="#000" stroke-opacity="0.25" stroke-width="2" />
+              <path d="M 125,70 Q 200,85 275,70 L 285,240 Q 200,248 115,240 Z" fill="url(#bodyGrad)" />
+
+              <!-- 밑단 시보리 -->
+              <path id="bottomRib" d="M 115,240 Q 200,248 285,240 L 285,258 Q 200,266 115,258 Z" fill="#3b82c4" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4,2" />
+
+              <!-- 스냅 단추 및 앞섶 -->
+              <g id="snapsGroup">
+                <line x1="200" y1="85" x2="200" y2="240" stroke="#000" stroke-opacity="0.2" stroke-width="2.5" />
+                <circle cx="200" cy="105" r="4" fill="#ffffff" stroke="#94a3b8" />
+                <circle cx="200" cy="135" r="4" fill="#ffffff" stroke="#94a3b8" />
+                <circle cx="200" cy="165" r="4" fill="#ffffff" stroke="#94a3b8" />
+                <circle cx="200" cy="195" r="4" fill="#ffffff" stroke="#94a3b8" />
+                <circle cx="200" cy="225" r="4" fill="#ffffff" stroke="#94a3b8" />
+              </g>
+
+              <!-- 목 카라 시보리 -->
+              <path id="neckRib" d="M 152,65 Q 200,82 248,65 Q 242,50 200,50 Q 158,50 152,65 Z" fill="#3b82c4" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="3,1.5" />
+
+              <!-- 가슴 로고 텍스트 (실시간 갱신) -->
+              <g transform="translate(162, 125)">
+                <circle cx="0" cy="0" r="16" fill="#ffffff" fill-opacity="0.15" />
+                <text id="jacketLogoSvg" x="0" y="5" fill="#ffffff" font-size="11" font-weight="900" text-anchor="middle" font-family="'Pretendard', sans-serif">
+                  SSU CSE
+                </text>
+              </g>
+
+              <!-- 이름 자수 (옵션 선택 시 노출) -->
+              <g id="nameEmbroideryG" style="display: none;" transform="translate(162, 150)">
+                <rect x="-24" y="-8" width="48" height="15" rx="3" fill="#000000" fill-opacity="0.25" />
+                <text id="nameSvgText" x="0" y="3" fill="#fef08a" font-size="9" font-weight="bold" text-anchor="middle">
+                  홍길동
+                </text>
+              </g>
+
+              <!-- 백마 1897 헤리티지 패치 -->
+              <g transform="translate(238, 125)">
+                <circle cx="0" cy="0" r="14" fill="#ffffff" fill-opacity="0.1" />
+                <text x="0" y="4" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle" fill-opacity="0.9">
+                  1897
+                </text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="preview-meta">
+            <span>몸통: <strong id="metaBodyColor">#1a2e56</strong></span>
+            <span>소매: <strong id="metaSleeveColor">#ffffff</strong></span>
+            <span>로고: <strong id="metaLogoText">SSU CSE</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- [2단계 카드] 잠바 종류 및 사이즈 -->
+      <!-- ================================================================== -->
+      <section class="card">
+        <div class="step-header">
+          <span class="step-number">2</span>
+          <h2 class="step-title">잠바 종류 & 사이즈</h2>
+        </div>
+
+        <!-- 5. 잠바 종류 (라디오 버튼, 가로 배치) -->
+        <div class="form-group">
+          <label>잠바 종류 <span class="req">*</span></label>
+          <div class="radio-group-horiz" id="jacketTypeGroup">
+            <label class="choice-card active" for="type_baseball">
+              <div>
+                <input type="radio" name="jacketType" id="type_baseball" value="baseball" checked />
+                <span>과잠(야구잠바)</span>
+              </div>
+              <span class="sub-label">기본가</span>
+            </label>
+            <label class="choice-card" for="type_hoodie">
+              <div>
+                <input type="radio" name="jacketType" id="type_hoodie" value="hoodie" />
+                <span>후드집업</span>
+              </div>
+              <span class="sub-label">-3,000원</span>
+            </label>
+            <label class="choice-card" for="type_windbreaker">
+              <div>
+                <input type="radio" name="jacketType" id="type_windbreaker" value="windbreaker" />
+                <span>바람막이</span>
+              </div>
+              <span class="sub-label">-5,000원</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 6. 사이즈 (라디오 버튼, 가로 배치) -->
+        <div class="form-group">
+          <label>사이즈 <span class="req">*</span></label>
+          <div class="radio-group-horiz" id="sizeGroup">
+            <label class="size-card" for="size_S">
+              <input type="radio" name="size" id="size_S" value="S" style="display:none;" />
+              S
+              <span class="delta">+0원</span>
+            </label>
+            <label class="size-card active" for="size_M">
+              <input type="radio" name="size" id="size_M" value="M" checked style="display:none;" />
+              M
+              <span class="delta">+0원</span>
+            </label>
+            <label class="size-card" for="size_L">
+              <input type="radio" name="size" id="size_L" value="L" style="display:none;" />
+              L
+              <span class="delta">+0원</span>
+            </label>
+            <label class="size-card" for="size_XL">
+              <input type="radio" name="size" id="size_XL" value="XL" style="display:none;" />
+              XL
+              <span class="delta">+2,000원</span>
+            </label>
+            <label class="size-card" for="size_XXL">
+              <input type="radio" name="size" id="size_XXL" value="XXL" style="display:none;" />
+              XXL
+              <span class="delta">+3,000원</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- [3단계 카드] 추가 옵션 및 수량 -->
+      <!-- ================================================================== -->
+      <section class="card">
+        <div class="step-header">
+          <span class="step-number">3</span>
+          <h2 class="step-title">추가 옵션 & 수량</h2>
+        </div>
+
+        <!-- 7. 추가 옵션 (체크박스, 가로 배치) -->
+        <div class="form-group">
+          <label>추가 옵션 선택</label>
+          <div class="checkbox-group-horiz">
+            <label class="choice-card" for="opt_name">
+              <div>
+                <input type="checkbox" id="opt_name" value="name_embroidery" data-price="5000" />
+                <span>이름 자수</span>
+              </div>
+              <span class="sub-label">+5,000원</span>
+            </label>
+            <label class="choice-card" for="opt_sid">
+              <div>
+                <input type="checkbox" id="opt_sid" value="sid_embroidery" data-price="3000" />
+                <span>학번 자수</span>
+              </div>
+              <span class="sub-label">+3,000원</span>
+            </label>
+            <label class="choice-card" for="opt_patch">
+              <div>
+                <input type="checkbox" id="opt_patch" value="sleeve_patch" data-price="2000" />
+                <span>팔 로고 패치</span>
+              </div>
+              <span class="sub-label">+2,000원</span>
+            </label>
+            <label class="choice-card" for="opt_fleece">
+              <div>
+                <input type="checkbox" id="opt_fleece" value="fleece_lining" data-price="4000" />
+                <span>기모 안감</span>
+              </div>
+              <span class="sub-label">+4,000원</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 8. 수량 (number 타입, 최소 1, 최대 5, 기본값 1) -->
+        <div class="quantity-row">
+          <div>
+            <label for="quantityInput" style="margin-bottom:0;">주문 수량 <span class="req">*</span></label>
+            <span class="sub-label">최소 1벌, 최대 5벌 신청 가능</span>
+          </div>
+          <div class="qty-buttons">
+            <button type="button" class="qty-btn" id="btnQtyMinus">-</button>
+            <input type="number" id="quantityInput" class="qty-input" min="1" max="5" value="1" />
+            <button type="button" class="qty-btn" id="btnQtyPlus">+</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- [4단계 카드] 신청자 정보 및 최종 신청 -->
+      <!-- ================================================================== -->
+      <section class="card">
+        <div class="step-header">
+          <span class="step-number">4</span>
+          <h2 class="step-title">신청자 정보 & 최종 신청</h2>
+        </div>
+
+        <!-- 1. 이름 (필수, text) -->
+        <div class="form-group">
+          <label for="applicantName">이름 <span class="req">*</span></label>
+          <input type="text" id="applicantName" placeholder="예: 홍길동" required />
+        </div>
+
+        <!-- 2. 학번 (필수, text, 숫자 8자리) -->
+        <div class="form-group">
+          <label for="applicantSid">학번 <span class="req">*</span> <span class="sub-label">(숫자 8자리 입력, 예: 20241234)</span></label>
+          <input type="text" id="applicantSid" placeholder="20240000" maxlength="8" required />
+        </div>
+
+        <!-- 3. 전화번호 (tel) -->
+        <div class="form-group">
+          <label for="applicantPhone">전화번호</label>
+          <input type="tel" id="applicantPhone" placeholder="010-1234-5678" />
+        </div>
+
+        <!-- 9. 요청사항 (textarea) -->
+        <div class="form-group">
+          <label for="requestNote">요청사항</label>
+          <textarea id="requestNote" rows="2" placeholder="자수 이니셜, 특이사항 등이 있으시면 작성해주세요."></textarea>
+        </div>
+
+        <!-- 유효성 검사 에러 메시지 알림 -->
+        <div id="errorBox" class="error-box"></div>
+
+        <!-- 실시간 예상 금액 표시 영역: 신청하기 버튼 바로 위에 큰 글씨 (24px, 네이비, 굵게, 가운데) -->
+        <div class="price-section">
+          <div class="price-label">실시간 예상 총 금액</div>
+          <div class="price-value" id="totalPriceDisplay">예상 금액: 65,000원</div>
+        </div>
+
+        <!-- 10. 신청하기 버튼 & 11. 다시 작성 버튼 -->
+        <div class="btn-group">
+          <button type="submit" id="btnSubmit" class="btn-submit">
+            공동구매 신청하기
+          </button>
+          <button type="button" id="btnReset" class="btn-reset">
+            다시 작성
+          </button>
+        </div>
+      </section>
+
+    </form>
+
+    <!-- 신청 완료 메시지 박스 (연두색 배경, 초록 글씨, 둥근 모서리) -->
+    <div id="successBox" class="success-card">
+      <h3>🎉 신청이 완료되었습니다!</h3>
+      <p id="successMessageText"></p>
+    </div>
+
+    <!-- 화면 하단: 내 신청 내역 목록 카드 -->
+    <section class="card">
+      <div class="step-header">
+        <h2 class="step-title">내 신청 내역</h2>
+      </div>
+      <div id="orderList" class="order-history-list">
+        <div class="empty-orders">아직 신청한 내역이 없습니다. 위 폼을 작성해 신청해보세요!</div>
+      </div>
+    </section>
+
+    <footer>
+      © 숭실대학교 총학생회 및 단과대학 연합 잠바 공동구매 플랫폼
+    </footer>
+
+  </div>
+
+  <!-- ========================================================================
+       [JavaScript 기능]
+       - 바닐라 JS로 작성, 외부 라이브러리 없음
+       - 소속·가격 상수 객체 상단 분리
+       - 연동 드롭다운, 실시간 미리보기, 금액 계산, 유효성 검사, 신청 내역 관리
+       ======================================================================== -->
+  <script>
+    /* ========================================================================
+     * 1. 소속 데이터 및 가격 설정 (코드 상단 상수 객체)
+     * ======================================================================== */
+    const AFFILIATIONS = [
+      // 1. 학교 공용
+      {
+        id: 'ssu_classic',
+        name: '숭실대 학교잠바 (기본형)',
+        category: '학교 공용',
+        group: '본교 공용',
+        bodyColor: '#1f3a6e',
+        sleeveColor: '#ffffff',
+        ribColor: '#3b82c4',
+        logoText: 'SOONGSIL',
+        basePrice: 65000,
+        currentCount: 24,
+        targetCount: 30
+      },
+      {
+        id: 'ssu_black',
+        name: '숭실대 학교잠바 (올블랙 로고형)',
+        category: '학교 공용',
+        group: '본교 공용',
+        bodyColor: '#1a1d20',
+        sleeveColor: '#2b2e34',
+        ribColor: '#1a1d20',
+        logoText: 'SSU 1897',
+        basePrice: 66000,
+        currentCount: 28,
+        targetCount: 30
+      },
+
+      // 2. 단과대학(과잠) : IT대학
+      {
+        id: 'it_cse',
+        name: '컴퓨터학부',
+        category: '단과대학(과잠)',
+        group: 'IT대학',
+        bodyColor: '#1a2e56',
+        sleeveColor: '#ffffff',
+        ribColor: '#3b82c4',
+        logoText: 'SSU CSE',
+        basePrice: 65000,
+        currentCount: 23,
+        targetCount: 30
+      },
+      {
+        id: 'it_sw',
+        name: '소프트웨어학부',
+        category: '단과대학(과잠)',
+        group: 'IT대학',
+        bodyColor: '#142a4a',
+        sleeveColor: '#ffffff',
+        ribColor: '#2563eb',
+        logoText: 'SSU SW',
+        basePrice: 65000,
+        currentCount: 19,
+        targetCount: 30
+      },
+      {
+        id: 'it_ai',
+        name: 'AI융합학부',
+        category: '단과대학(과잠)',
+        group: 'IT대학',
+        bodyColor: '#1e3050',
+        sleeveColor: '#e2e8f0',
+        ribColor: '#0ea5e9',
+        logoText: 'SSU AI',
+        basePrice: 65000,
+        currentCount: 25,
+        targetCount: 30
+      },
+      {
+        id: 'it_ece',
+        name: '전자정보공학부',
+        category: '단과대학(과잠)',
+        group: 'IT대학',
+        bodyColor: '#16233b',
+        sleeveColor: '#ffffff',
+        ribColor: '#f59e0b',
+        logoText: 'SSU ECE',
+        basePrice: 65000,
+        currentCount: 18,
+        targetCount: 30
+      },
+      {
+        id: 'it_gmedia',
+        name: '글로벌미디어학부',
+        category: '단과대학(과잠)',
+        group: 'IT대학',
+        bodyColor: '#2c3240',
+        sleeveColor: '#ffffff',
+        ribColor: '#8b5cf6',
+        logoText: 'G-MEDIA',
+        basePrice: 65000,
+        currentCount: 21,
+        targetCount: 30
+      },
+      {
+        id: 'it_mm',
+        name: '미디어경영학과',
+        category: '단과대학(과잠)',
+        group: 'IT대학',
+        bodyColor: '#203254',
+        sleeveColor: '#f1f5f9',
+        ribColor: '#0284c7',
+        logoText: 'SSU MM',
+        basePrice: 65000,
+        currentCount: 14,
+        targetCount: 25
+      },
+
+      // 2. 단과대학(과잠) : 공과대학
+      {
+        id: 'eng_chem',
+        name: '화학공학과',
+        category: '단과대학(과잠)',
+        group: '공과대학',
+        bodyColor: '#153e35',
+        sleeveColor: '#ffffff',
+        ribColor: '#10b981',
+        logoText: 'SSU CBE',
+        basePrice: 65000,
+        currentCount: 22,
+        targetCount: 30
+      },
+      {
+        id: 'eng_mech',
+        name: '기계공학부',
+        category: '단과대학(과잠)',
+        group: '공과대학',
+        bodyColor: '#1d2838',
+        sleeveColor: '#ffffff',
+        ribColor: '#64748b',
+        logoText: 'SSU MECH',
+        basePrice: 65000,
+        currentCount: 26,
+        targetCount: 30
+      },
+      {
+        id: 'eng_mse',
+        name: '신소재공학과',
+        category: '단과대학(과잠)',
+        group: '공과대학',
+        bodyColor: '#282b34',
+        sleeveColor: '#e2e8f0',
+        ribColor: '#94a3b8',
+        logoText: 'SSU MSE',
+        basePrice: 65000,
+        currentCount: 17,
+        targetCount: 25
+      },
+      {
+        id: 'eng_ee',
+        name: '전기공학부',
+        category: '단과대학(과잠)',
+        group: '공과대학',
+        bodyColor: '#172e54',
+        sleeveColor: '#ffffff',
+        ribColor: '#eab308',
+        logoText: 'SSU EE',
+        basePrice: 65000,
+        currentCount: 20,
+        targetCount: 30
+      },
+      {
+        id: 'eng_arch',
+        name: '건축학부',
+        category: '단과대학(과잠)',
+        group: '공과대학',
+        bodyColor: '#363942',
+        sleeveColor: '#1c1e24',
+        ribColor: '#71717a',
+        logoText: 'SSU ARCH',
+        basePrice: 65000,
+        currentCount: 29,
+        targetCount: 30
+      },
+      {
+        id: 'eng_ise',
+        name: '산업·정보시스템공학과',
+        category: '단과대학(과잠)',
+        group: '공과대학',
+        bodyColor: '#1d3356',
+        sleeveColor: '#ffffff',
+        ribColor: '#38bdf8',
+        logoText: 'SSU ISE',
+        basePrice: 65000,
+        currentCount: 16,
+        targetCount: 25
+      },
+
+      // 2. 단과대학(과잠) : 경영대학
+      {
+        id: 'biz_biz',
+        name: '경영학부',
+        category: '단과대학(과잠)',
+        group: '경영대학',
+        bodyColor: '#1a325e',
+        sleeveColor: '#fffbeb',
+        ribColor: '#d97706',
+        logoText: 'SSU BIZ',
+        basePrice: 65000,
+        currentCount: 32,
+        targetCount: 30
+      },
+      {
+        id: 'biz_venture',
+        name: '벤처중소기업학과',
+        category: '단과대학(과잠)',
+        group: '경영대학',
+        bodyColor: '#4a1525',
+        sleeveColor: '#ffffff',
+        ribColor: '#f43f5e',
+        logoText: 'SSU VENTURE',
+        basePrice: 65000,
+        currentCount: 21,
+        targetCount: 25
+      },
+      {
+        id: 'biz_acct',
+        name: '회계학과',
+        category: '단과대학(과잠)',
+        group: '경영대학',
+        bodyColor: '#1e293b',
+        sleeveColor: '#ffffff',
+        ribColor: '#64748b',
+        logoText: 'SSU ACCT',
+        basePrice: 65000,
+        currentCount: 15,
+        targetCount: 25
+      },
+      {
+        id: 'biz_fin',
+        name: '금융학부',
+        category: '단과대학(과잠)',
+        group: '경영대학',
+        bodyColor: '#162b4d',
+        sleeveColor: '#fef3c7',
+        ribColor: '#ca8a04',
+        logoText: 'SSU FINANCE',
+        basePrice: 65000,
+        currentCount: 24,
+        targetCount: 30
+      },
+
+      // 2. 단과대학(과잠) : 법과대학
+      {
+        id: 'law_law',
+        name: '법학과',
+        category: '단과대학(과잠)',
+        group: '법과대학',
+        bodyColor: '#3c1824',
+        sleeveColor: '#ffffff',
+        ribColor: '#b91c1c',
+        logoText: 'SSU LAW',
+        basePrice: 65000,
+        currentCount: 19,
+        targetCount: 25
+      },
+      {
+        id: 'law_ilaw',
+        name: '국제법무학과',
+        category: '단과대학(과잠)',
+        group: '법과대학',
+        bodyColor: '#1a2b4c',
+        sleeveColor: '#f1f5f9',
+        ribColor: '#2563eb',
+        logoText: 'SSU I-LAW',
+        basePrice: 65000,
+        currentCount: 13,
+        targetCount: 20
+      },
+
+      // 2. 단과대학(과잠) : 인문대학
+      {
+        id: 'hum_kor',
+        name: '국어국문학과',
+        category: '단과대학(과잠)',
+        group: '인문대학',
+        bodyColor: '#2d251e',
+        sleeveColor: '#fafaf9',
+        ribColor: '#78716c',
+        logoText: 'SSU KOR',
+        basePrice: 65000,
+        currentCount: 18,
+        targetCount: 25
+      },
+      {
+        id: 'hum_eng',
+        name: '영어영문학과',
+        category: '단과대학(과잠)',
+        group: '인문대학',
+        bodyColor: '#17362d',
+        sleeveColor: '#ffffff',
+        ribColor: '#059669',
+        logoText: 'SSU ENG',
+        basePrice: 65000,
+        currentCount: 23,
+        targetCount: 30
+      },
+
+      // 2. 단과대학(과잠) : 자연과학대학
+      {
+        id: 'sci_math',
+        name: '수학과',
+        category: '단과대학(과잠)',
+        group: '자연과학대학',
+        bodyColor: '#182b4a',
+        sleeveColor: '#ffffff',
+        ribColor: '#0284c7',
+        logoText: 'SSU MATH',
+        basePrice: 65000,
+        currentCount: 21,
+        targetCount: 25
+      },
+      {
+        id: 'sci_bio',
+        name: '의생명시스템학부',
+        category: '단과대학(과잠)',
+        group: '자연과학대학',
+        bodyColor: '#153a42',
+        sleeveColor: '#f0fdfa',
+        ribColor: '#0d9488',
+        logoText: 'SSU BIO',
+        basePrice: 65000,
+        currentCount: 27,
+        targetCount: 30
+      },
+
+      // 2. 단과대학(과잠) : 사회과학대학
+      {
+        id: 'soc_pa',
+        name: '행정학부',
+        category: '단과대학(과잠)',
+        group: '사회과학대학',
+        bodyColor: '#1b2c4e',
+        sleeveColor: '#ffffff',
+        ribColor: '#3b82c4',
+        logoText: 'SSU PA',
+        basePrice: 65000,
+        currentCount: 22,
+        targetCount: 30
+      },
+
+      // 2. 단과대학(과잠) : 경제통상대학
+      {
+        id: 'eco_econ',
+        name: '경제학과',
+        category: '단과대학(과잠)',
+        group: '경제통상대학',
+        bodyColor: '#172e50',
+        sleeveColor: '#ffffff',
+        ribColor: '#0284c7',
+        logoText: 'SSU ECON',
+        basePrice: 65000,
+        currentCount: 27,
+        targetCount: 30
+      },
+
+      // 3. 동아리(동아리잠바)
+      {
+        id: 'club_yourssu',
+        name: '유어슈 (YOURSSU)',
+        category: '동아리(동아리잠바)',
+        group: '중앙·학술·IT 동아리',
+        bodyColor: '#0051ff',
+        sleeveColor: '#ffffff',
+        ribColor: '#0038b8',
+        logoText: 'YOURSSU',
+        basePrice: 67000,
+        currentCount: 28,
+        targetCount: 30
+      },
+      {
+        id: 'club_sscc',
+        name: 'SSCC (숭실 컴퓨터 연구회)',
+        category: '동아리(동아리잠바)',
+        group: '중앙·학술·IT 동아리',
+        bodyColor: '#0f172a',
+        sleeveColor: '#cbd5e1',
+        ribColor: '#38bdf8',
+        logoText: 'SSCC 1978',
+        basePrice: 66000,
+        currentCount: 22,
+        targetCount: 25
+      },
+      {
+        id: 'club_dasom',
+        name: '다솜 (DASOM)',
+        category: '동아리(동아리잠바)',
+        group: '중앙·학술·IT 동아리',
+        bodyColor: '#1c1b33',
+        sleeveColor: '#ffffff',
+        ribColor: '#818cf8',
+        logoText: 'DASOM',
+        basePrice: 65000,
+        currentCount: 19,
+        targetCount: 25
+      }
+    ];
+
+    // 잠바 종류별 가격 변동 (과잠 0원, 후드집업 -3,000원, 바람막이 -5,000원)
+    const JACKET_TYPE_PRICES = {
+      baseball: 0,
+      hoodie: -3000,
+      windbreaker: -5000
+    };
+
+    // 사이즈별 가격 변동 (S/M/L 0원, XL +2,000원, XXL +3,000원)
+    const SIZE_PRICES = {
+      S: 0,
+      M: 0,
+      L: 0,
+      XL: 2000,
+      XXL: 3000
+    };
+
+    // 소속별 현재 인원 관리 맵 (신청 시 실시간 증가)
+    const currentCounts = {};
+    AFFILIATIONS.forEach(item => {
+      currentCounts[item.id] = item.currentCount;
+    });
+
+    // 신청 내역 저장 배열
+    let myApplicationsList = [];
+
+    /* ========================================================================
+     * 2. DOM 요소 참조
+     * ======================================================================== */
+    const categorySelect = document.getElementById('categorySelect');
+    const groupSelect = document.getElementById('groupSelect');
+    const itemSelect = document.getElementById('itemSelect');
+
+    const progressAffiliationTitle = document.getElementById('progressAffiliationTitle');
+    const progressCountLabel = document.getElementById('progressCountLabel');
+    const progressBarFill = document.getElementById('progressBarFill');
+    const progressPercentage = document.getElementById('progressPercentage');
+    const progressStatusText = document.getElementById('progressStatusText');
+
+    const jacketBody = document.getElementById('jacketBody');
+    const leftSleeve = document.getElementById('leftSleeve');
+    const rightSleeve = document.getElementById('rightSleeve');
+    const neckRib = document.getElementById('neckRib');
+    const bottomRib = document.getElementById('bottomRib');
+    const leftRib = document.getElementById('leftRib');
+    const rightRib = document.getElementById('rightRib');
+    const jacketLogoSvg = document.getElementById('jacketLogoSvg');
+    const metaBodyColor = document.getElementById('metaBodyColor');
+    const metaSleeveColor = document.getElementById('metaSleeveColor');
+    const metaLogoText = document.getElementById('metaLogoText');
+
+    const sidEmbroideryG = document.getElementById('sidEmbroideryG');
+    const sidSvgText = document.getElementById('sidSvgText');
+    const nameEmbroideryG = document.getElementById('nameEmbroideryG');
+    const nameSvgText = document.getElementById('nameSvgText');
+    const patchG = document.getElementById('patchG');
+
+    const totalPriceDisplay = document.getElementById('totalPriceDisplay');
+    const errorBox = document.getElementById('errorBox');
+    const successBox = document.getElementById('successBox');
+    const successMessageText = document.getElementById('successMessageText');
+    const orderList = document.getElementById('orderList');
+
+    const applicantName = document.getElementById('applicantName');
+    const applicantSid = document.getElementById('applicantSid');
+    const applicantPhone = document.getElementById('applicantPhone');
+    const requestNote = document.getElementById('requestNote');
+    const quantityInput = document.getElementById('quantityInput');
+
+    /* ========================================================================
+     * 3. 소속 3단계 드롭다운 초기화 & 연동 기능
+     * ======================================================================== */
+    function initAffiliationDropdowns() {
+      // 1) 대분류 카테고리 추출
+      const categories = [...new Set(AFFILIATIONS.map(i => i.category))];
+      categorySelect.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
+
+      // 기본 선택: 단과대학(과잠)
+      if (categories.includes('단과대학(과잠)')) {
+        categorySelect.value = '단과대학(과잠)';
+      }
+
+      updateGroupDropdown();
+    }
+
+    function updateGroupDropdown() {
+      const selectedCat = categorySelect.value;
+      const groups = [...new Set(AFFILIATIONS.filter(i => i.category === selectedCat).map(i => i.group))];
+      groupSelect.innerHTML = groups.map(g => `<option value="${g}">${g}</option>`).join('');
+
+      if (groups.includes('IT대학')) {
+        groupSelect.value = 'IT대학';
+      }
+
+      updateItemDropdown();
+    }
+
+    function updateItemDropdown() {
+      const selectedCat = categorySelect.value;
+      const selectedGrp = groupSelect.value;
+      const items = AFFILIATIONS.filter(i => i.category === selectedCat && i.group === selectedGrp);
+      itemSelect.innerHTML = items.map(item => `<option value="${item.id}">${item.name}</option>`).join('');
+
+      // 기본 선택: 컴퓨터학부
+      const defaultItem = items.find(i => i.id === 'it_cse');
+      if (defaultItem) {
+        itemSelect.value = defaultItem.id;
+      }
+
+      onAffiliationChanged();
+    }
+
+    categorySelect.addEventListener('change', updateGroupDropdown);
+    groupSelect.addEventListener('change', updateItemDropdown);
+    itemSelect.addEventListener('change', onAffiliationChanged);
+
+    // 현재 선택된 소속 항목 객체 가져오기
+    function getSelectedAffiliation() {
+      const id = itemSelect.value;
+      return AFFILIATIONS.find(a => a.id === id) || AFFILIATIONS[0];
+    }
+
+    /* ========================================================================
+     * 4. 실시간 미리보기 및 공구 현황 갱신
+     * ======================================================================== */
+    function onAffiliationChanged() {
+      const item = getSelectedAffiliation();
+      if (!item) return;
+
+      // 몸통색, 소매색, 시보리색, 로고 즉시 반영
+      jacketBody.setAttribute('fill', item.bodyColor);
+      leftSleeve.setAttribute('fill', item.sleeveColor);
+      rightSleeve.setAttribute('fill', item.sleeveColor);
+      neckRib.setAttribute('fill', item.ribColor);
+      bottomRib.setAttribute('fill', item.ribColor);
+      leftRib.setAttribute('fill', item.ribColor);
+      rightRib.setAttribute('fill', item.ribColor);
+      jacketLogoSvg.textContent = item.logoText;
+
+      metaBodyColor.textContent = item.bodyColor;
+      metaSleeveColor.textContent = item.sleeveColor;
+      metaLogoText.textContent = item.logoText;
+
+      // 공구 진행 현황 갱신
+      updateProgressDisplay(item);
+
+      // 금액 재계산
+      calculateEstimatedPrice();
+    }
+
+    function updateProgressDisplay(item) {
+      const current = currentCounts[item.id] || item.currentCount;
+      const target = item.targetCount;
+      const percent = Math.min(100, Math.round((current / target) * 100));
+      const isConfirmed = current >= target;
+
+      progressAffiliationTitle.innerHTML = `${item.name} 공구 현황 ${isConfirmed ? '<span class="badge-confirmed">공구 확정!</span>' : ''}`;
+      progressCountLabel.innerHTML = `현재 <strong>${current}명</strong> / 목표 ${target}명`;
+      progressBarFill.style.width = percent + '%';
+      progressPercentage.textContent = `진행률 ${percent}%`;
+      progressStatusText.textContent = isConfirmed ? '목표 인원을 채워 제작이 확정되었습니다!' : `목표까지 ${target - current}명 남음`;
+    }
+
+    /* ========================================================================
+     * 5. 실시간 예상 금액 계산 (단가 + 변동금액) * 수량
+     * ======================================================================== */
+    function calculateEstimatedPrice() {
+      const aff = getSelectedAffiliation();
+      const basePrice = aff ? aff.basePrice : 65000;
+
+      // 잠바 종류 변동액
+      const checkedType = document.querySelector('input[name="jacketType"]:checked');
+      const typeDelta = checkedType ? (JACKET_TYPE_PRICES[checkedType.value] || 0) : 0;
+
+      // 사이즈 변동액
+      const checkedSize = document.querySelector('input[name="size"]:checked');
+      const sizeDelta = checkedSize ? (SIZE_PRICES[checkedSize.value] || 0) : 0;
+
+      // 추가 옵션 합산
+      let optionsTotal = 0;
+      const optCheckboxes = document.querySelectorAll('.checkbox-group-horiz input[type="checkbox"]:checked');
+      optCheckboxes.forEach(cb => {
+        optionsTotal += parseInt(cb.getAttribute('data-price') || '0', 10);
+      });
+
+      // 수량
+      const qty = parseInt(quantityInput.value, 10) || 1;
+
+      // 총 금액 계산
+      const unitPrice = basePrice + typeDelta + sizeDelta + optionsTotal;
+      const total = Math.max(0, unitPrice * qty);
+
+      // 천 단위 콤마 toLocaleString 적용하여 표시
+      totalPriceDisplay.textContent = `예상 금액: ${total.toLocaleString('ko-KR')}원`;
+
+      return total;
+    }
+
+    /* ========================================================================
+     * 6. 라디오, 체크박스, 수량 실시간 이벤트 리스너
+     * ======================================================================== */
+    // 라디오 버튼 활성 스타일 및 이벤트
+    document.querySelectorAll('input[name="jacketType"]').forEach(r => {
+      r.addEventListener('change', () => {
+        document.querySelectorAll('#jacketTypeGroup .choice-card').forEach(c => c.classList.remove('active'));
+        r.closest('.choice-card').classList.add('active');
+        calculateEstimatedPrice();
+      });
+    });
+
+    document.querySelectorAll('input[name="size"]').forEach(r => {
+      r.addEventListener('change', () => {
+        document.querySelectorAll('#sizeGroup .size-card').forEach(c => c.classList.remove('active'));
+        r.closest('.size-card').classList.add('active');
+        calculateEstimatedPrice();
+      });
+    });
+
+    // 추가 옵션 체크박스
+    document.querySelectorAll('.checkbox-group-horiz input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const card = cb.closest('.choice-card');
+        if (cb.checked) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+
+        // 일러스트 자수 실시간 토글
+        if (cb.value === 'sid_embroidery') {
+          sidEmbroideryG.style.display = cb.checked ? 'block' : 'none';
+        }
+        if (cb.value === 'name_embroidery') {
+          nameEmbroideryG.style.display = cb.checked ? 'block' : 'none';
+        }
+        if (cb.value === 'sleeve_patch') {
+          patchG.style.display = cb.checked ? 'block' : 'none';
+        }
+
+        calculateEstimatedPrice();
+      });
+    });
+
+    // 수량 변경 버튼 (+, -)
+    document.getElementById('btnQtyMinus').addEventListener('click', () => {
+      let val = parseInt(quantityInput.value, 10) || 1;
+      if (val > 1) {
+        quantityInput.value = val - 1;
+        calculateEstimatedPrice();
+      }
+    });
+
+    document.getElementById('btnQtyPlus').addEventListener('click', () => {
+      let val = parseInt(quantityInput.value, 10) || 1;
+      if (val < 5) {
+        quantityInput.value = val + 1;
+        calculateEstimatedPrice();
+      }
+    });
+
+    quantityInput.addEventListener('input', () => {
+      let val = parseInt(quantityInput.value, 10);
+      if (isNaN(val) || val < 1) val = 1;
+      if (val > 5) val = 5;
+      quantityInput.value = val;
+      calculateEstimatedPrice();
+    });
+
+    // 이름/학번 입력 시 실시간 자수 일러스트 갱신
+    applicantName.addEventListener('input', () => {
+      const val = applicantName.value.trim();
+      nameSvgText.textContent = val || '홍길동';
+    });
+
+    applicantSid.addEventListener('input', () => {
+      // 숫자만 필터링
+      applicantSid.value = applicantSid.value.replace(/[^0-9]/g, '');
+      const val = applicantSid.value.trim();
+      if (val.length >= 4) {
+        sidSvgText.textContent = val.slice(2, 4);
+      } else {
+        sidSvgText.textContent = '24';
+      }
+    });
+
+    /* ========================================================================
+     * 7. 폼 유효성 검사 및 신청하기 처리
+     * ======================================================================== */
+    document.getElementById('jambaForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      hideError();
+
+      const nameVal = applicantName.value.trim();
+      const sidVal = applicantSid.value.trim();
+      const itemVal = itemSelect.value;
+
+      // 1) 이름 유효성 검사
+      if (!nameVal) {
+        showError('이름을 입력해주세요');
+        applicantName.focus();
+        return;
+      }
+
+      // 2) 학번 8자리 숫자 유효성 검사
+      if (!/^\d{8}$/.test(sidVal)) {
+        showError('학번을 올바르게 입력해주세요 (숫자 8자리)');
+        applicantSid.focus();
+        return;
+      }
+
+      // 3) 소속 선택 유효성 검사
+      if (!itemVal) {
+        showError('소속을 선택해주세요');
+        itemSelect.focus();
+        return;
+      }
+
+      // 정상 신청 처리
+      const aff = getSelectedAffiliation();
+      const checkedType = document.querySelector('input[name="jacketType"]:checked');
+      const typeName = checkedType.closest('.choice-card').querySelector('span').textContent;
+      const checkedSize = document.querySelector('input[name="size"]:checked').value;
+      const qty = parseInt(quantityInput.value, 10) || 1;
+      const totalAmount = calculateEstimatedPrice();
+
+      // 선택된 옵션 텍스트 생성
+      const selectedOpts = [];
+      document.querySelectorAll('.checkbox-group-horiz input[type="checkbox"]:checked').forEach(cb => {
+        selectedOpts.push(cb.closest('.choice-card').querySelector('span').textContent);
+      });
+      const optsText = selectedOpts.length > 0 ? ` (${selectedOpts.join(', ')})` : '';
+
+      // 신청 완료 메시지: "홍길동님, 컴퓨터학부 과잠 M사이즈 (이름 자수) 1벌, 총 68,000원 신청이 접수되었습니다!"
+      const successMsg = `${nameVal}님, ${aff.name} ${typeName} ${checkedSize}사이즈${optsText} ${qty}벌, 총 ${totalAmount.toLocaleString('ko-KR')}원 신청이 접수되었습니다!`;
+      
+      successMessageText.textContent = successMsg;
+      successBox.style.display = 'block';
+      successBox.scrollIntoView({ behavior: 'smooth' });
+
+      // 공동구매 인원 증가
+      currentCounts[aff.id] = (currentCounts[aff.id] || aff.currentCount) + qty;
+      updateProgressDisplay(aff);
+
+      // 내 신청 내역에 추가
+      const newOrder = {
+        name: nameVal,
+        sid: sidVal,
+        affName: aff.name,
+        typeName: typeName,
+        size: checkedSize,
+        opts: selectedOpts.length > 0 ? selectedOpts.join(', ') : '없음',
+        qty: qty,
+        price: totalAmount,
+        time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
+      };
+      myApplicationsList.unshift(newOrder);
+      renderOrderList();
+    });
+
+    function showError(msg) {
+      errorBox.textContent = `⚠️ ${msg}`;
+      errorBox.style.display = 'block';
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideError() {
+      errorBox.style.display = 'none';
+      errorBox.textContent = '';
+    }
+
+    /* ========================================================================
+     * 8. 내 신청 내역 렌더링
+     * ======================================================================== */
+    function renderOrderList() {
+      if (myApplicationsList.length === 0) {
+        orderList.innerHTML = '<div class="empty-orders">아직 신청한 내역이 없습니다. 위 폼을 작성해 신청해보세요!</div>';
+        return;
+      }
+
+      orderList.innerHTML = myApplicationsList.map(order => `
+        <div class="order-item">
+          <div class="order-item-header">
+            <span>${order.affName} · ${order.typeName} (${order.size})</span>
+            <span class="order-item-price">${order.price.toLocaleString('ko-KR')}원</span>
+          </div>
+          <div class="order-item-grid">
+            <div>신청자: <strong>${order.name}</strong> (${order.sid})</div>
+            <div>수량: <strong>${order.qty}벌</strong></div>
+            <div>옵션: ${order.opts}</div>
+            <div>접수 시간: ${order.time}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ========================================================================
+     * 9. 다시 작성 버튼 (모든 입력, 미리보기, 금액 초기화)
+     * ======================================================================== */
+    document.getElementById('btnReset').addEventListener('click', () => {
+      // 폼 리셋
+      document.getElementById('jambaForm').reset();
+
+      // 드롭다운 기본값으로 복구
+      categorySelect.value = '단과대학(과잠)';
+      updateGroupDropdown();
+
+      // 라디오 버튼 활성 클래스 복구
+      document.querySelectorAll('#jacketTypeGroup .choice-card').forEach(c => c.classList.remove('active'));
+      document.getElementById('type_baseball').closest('.choice-card').classList.add('active');
+      document.getElementById('type_baseball').checked = true;
+
+      document.querySelectorAll('#sizeGroup .size-card').forEach(c => c.classList.remove('active'));
+      document.getElementById('size_M').closest('.size-card').classList.add('active');
+      document.getElementById('size_M').checked = true;
+
+      // 체크박스 활성 클래스 해제 및 자수 숨김
+      document.querySelectorAll('.checkbox-group-horiz .choice-card').forEach(c => c.classList.remove('active'));
+      sidEmbroideryG.style.display = 'none';
+      nameEmbroideryG.style.display = 'none';
+      patchG.style.display = 'none';
+
+      // 텍스트 복구
+      nameSvgText.textContent = '홍길동';
+      sidSvgText.textContent = '24';
+      quantityInput.value = 1;
+
+      // 메시지 숨김
+      hideError();
+      successBox.style.display = 'none';
+
+      // 소속 및 금액 초기화
+      onAffiliationChanged();
+    });
+
+    // 초기 실행
+    window.addEventListener('DOMContentLoaded', () => {
+      initAffiliationDropdowns();
+    });
+  </script>
+</body>
+</html>
