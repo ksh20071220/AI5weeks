@@ -3,7 +3,7 @@
  * 숭실대학교 잠바 공동구매 - 소속 및 가격 설정 데이터
  * ============================================================================
  * 숭실대학교 공식 홈페이지(ssu.ac.kr) 학사 안내 및 단과대학/동아리 기준
- * 나중에 단가나 신설 학과, 동아리가 변경되어도 이 파일만 수정하면 손쉽게 반영됩니다.
+ * 불필요한 더미 데이터 없이 실제 접수되는 신청 건수를 기준으로 집계됩니다 (초기값 0명)
  */
 
 // 1. 잠바 종류별 가격 변동 데이터
@@ -62,11 +62,12 @@ export interface AffiliationItem {
   logoText: string;  // 가슴/등판 로고 텍스트
   subLogoText?: string;
   basePrice: number; // 기본 단가 (원)
-  currentCount: number; // 현재 신청 인원
+  currentCount: number; // 현재 신청 인원 (실제 신청 누적, 초기값 0)
   targetCount: number;  // 공동구매 목표 인원 (도달 시 공구 확정)
 }
 
 // 5. 전체 소속 데이터베이스 (학교 공용, 단과대학별 학과, 동아리)
+// 더미 데이터 없이 모두 실제 신청 인원 0명으로 시작합니다.
 export const AFFILIATION_DATA: AffiliationItem[] = [
   // --- 1. 학교 공용 ---
   {
@@ -80,7 +81,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SOONGSIL',
     subLogoText: '1897 SSU',
     basePrice: 65000,
-    currentCount: 24,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -94,7 +95,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU 1897',
     subLogoText: 'EST. 1897',
     basePrice: 66000,
-    currentCount: 28,
+    currentCount: 0,
     targetCount: 30,
   },
 
@@ -110,7 +111,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU CSE',
     subLogoText: 'COMPUTER SCIENCE',
     basePrice: 65000,
-    currentCount: 23,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -124,7 +125,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU SW',
     subLogoText: 'SOFTWARE ENG',
     basePrice: 65000,
-    currentCount: 19,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -138,7 +139,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU AI',
     subLogoText: 'AI CONVERGENCE',
     basePrice: 65000,
-    currentCount: 25,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -152,7 +153,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU ECE',
     subLogoText: 'ELECTRONIC & INFO',
     basePrice: 65000,
-    currentCount: 18,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -166,7 +167,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'G-MEDIA',
     subLogoText: 'GLOBAL MEDIA',
     basePrice: 65000,
-    currentCount: 21,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -180,7 +181,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU MM',
     subLogoText: 'MEDIA MGMT',
     basePrice: 65000,
-    currentCount: 14,
+    currentCount: 0,
     targetCount: 25,
   },
 
@@ -196,7 +197,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU CBE',
     subLogoText: 'CHEMICAL ENG',
     basePrice: 65000,
-    currentCount: 22,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -210,7 +211,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU MECH',
     subLogoText: 'MECHANICAL ENG',
     basePrice: 65000,
-    currentCount: 26,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -224,7 +225,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU MSE',
     subLogoText: 'MATERIALS SCI',
     basePrice: 65000,
-    currentCount: 17,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -238,7 +239,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU EE',
     subLogoText: 'ELECTRICAL ENG',
     basePrice: 65000,
-    currentCount: 20,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -252,7 +253,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU ARCH',
     subLogoText: 'ARCHITECTURE',
     basePrice: 65000,
-    currentCount: 29,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -266,7 +267,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU ISE',
     subLogoText: 'IND & SYSTEM ENG',
     basePrice: 65000,
-    currentCount: 16,
+    currentCount: 0,
     targetCount: 25,
   },
 
@@ -282,8 +283,8 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU BIZ',
     subLogoText: 'BUSINESS SCHOOL',
     basePrice: 65000,
-    currentCount: 32,
-    targetCount: 30, // 이미 초과 달성 예시
+    currentCount: 0,
+    targetCount: 30,
   },
   {
     id: 'biz_venture',
@@ -296,7 +297,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU VENTURE',
     subLogoText: 'ENTREPRENEURSHIP',
     basePrice: 65000,
-    currentCount: 21,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -310,7 +311,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU ACCT',
     subLogoText: 'ACCOUNTING',
     basePrice: 65000,
-    currentCount: 15,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -324,7 +325,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU FINANCE',
     subLogoText: 'GLOBAL FINANCE',
     basePrice: 65000,
-    currentCount: 24,
+    currentCount: 0,
     targetCount: 30,
   },
 
@@ -340,7 +341,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU LAW',
     subLogoText: 'COLLEGE OF LAW',
     basePrice: 65000,
-    currentCount: 19,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -354,7 +355,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU I-LAW',
     subLogoText: 'INTL LEGAL STUDIES',
     basePrice: 65000,
-    currentCount: 13,
+    currentCount: 0,
     targetCount: 20,
   },
 
@@ -370,7 +371,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU KOR',
     subLogoText: 'KOREAN LIT',
     basePrice: 65000,
-    currentCount: 18,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -384,7 +385,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU ENG',
     subLogoText: 'ENGLISH LIT',
     basePrice: 65000,
-    currentCount: 23,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -398,7 +399,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU PHILO',
     subLogoText: 'PHILOSOPHY',
     basePrice: 65000,
-    currentCount: 12,
+    currentCount: 0,
     targetCount: 20,
   },
   {
@@ -412,7 +413,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU HIST',
     subLogoText: 'DEPT OF HISTORY',
     basePrice: 65000,
-    currentCount: 16,
+    currentCount: 0,
     targetCount: 20,
   },
 
@@ -428,7 +429,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU MATH',
     subLogoText: 'MATHEMATICS',
     basePrice: 65000,
-    currentCount: 21,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -442,7 +443,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU PHYS',
     subLogoText: 'PHYSICS',
     basePrice: 65000,
-    currentCount: 17,
+    currentCount: 0,
     targetCount: 20,
   },
   {
@@ -456,7 +457,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU CHEM',
     subLogoText: 'CHEMISTRY',
     basePrice: 65000,
-    currentCount: 18,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -470,7 +471,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU BIO',
     subLogoText: 'BIOMEDICAL SYS',
     basePrice: 65000,
-    currentCount: 27,
+    currentCount: 0,
     targetCount: 30,
   },
 
@@ -486,7 +487,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU SWF',
     subLogoText: 'SOCIAL WELFARE',
     basePrice: 65000,
-    currentCount: 28,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -500,7 +501,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU PA',
     subLogoText: 'PUBLIC ADMIN',
     basePrice: 65000,
-    currentCount: 22,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -514,7 +515,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU COMM',
     subLogoText: 'MEDIA & COMM',
     basePrice: 65000,
-    currentCount: 24,
+    currentCount: 0,
     targetCount: 30,
   },
 
@@ -530,7 +531,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU ECON',
     subLogoText: 'ECONOMICS',
     basePrice: 65000,
-    currentCount: 27,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -544,7 +545,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU G-TRADE',
     subLogoText: 'GLOBAL COMMERCE',
     basePrice: 65000,
-    currentCount: 25,
+    currentCount: 0,
     targetCount: 30,
   },
 
@@ -560,7 +561,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'YOURSSU',
     subLogoText: 'IT PRODUCT TEAM',
     basePrice: 67000,
-    currentCount: 28,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -574,7 +575,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSCC 1978',
     subLogoText: 'SINCE 1978',
     basePrice: 66000,
-    currentCount: 22,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -588,7 +589,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'DASOM',
     subLogoText: 'COMP STUDY CLUB',
     basePrice: 65000,
-    currentCount: 19,
+    currentCount: 0,
     targetCount: 25,
   },
   {
@@ -602,7 +603,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU ORCH',
     subLogoText: 'ORCHESTRA',
     basePrice: 67000,
-    currentCount: 26,
+    currentCount: 0,
     targetCount: 30,
   },
   {
@@ -616,7 +617,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'BAEDARI',
     subLogoText: 'ROBOTICS CLUB',
     basePrice: 66000,
-    currentCount: 16,
+    currentCount: 0,
     targetCount: 20,
   },
   {
@@ -630,7 +631,7 @@ export const AFFILIATION_DATA: AffiliationItem[] = [
     logoText: 'SSU CHEER',
     subLogoText: 'BLUE PEGASUS',
     basePrice: 68000,
-    currentCount: 25,
-    targetCount: 25, // 목표 달성 상태
+    currentCount: 0,
+    targetCount: 25,
   },
 ];

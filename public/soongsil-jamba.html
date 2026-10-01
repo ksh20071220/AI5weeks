@@ -595,14 +595,14 @@
         <div class="progress-box">
           <div class="progress-info">
             <span id="progressAffiliationTitle">컴퓨터학부 공구 현황</span>
-            <span id="progressCountLabel">현재 23명 / 목표 30명</span>
+            <span id="progressCountLabel">현재 0명 / 목표 30명</span>
           </div>
           <div class="progress-bar-bg">
-            <div id="progressBarFill" class="progress-bar-fill" style="width: 76%;"></div>
+            <div id="progressBarFill" class="progress-bar-fill" style="width: 0%;"></div>
           </div>
           <div class="progress-subtext">
-            <span id="progressPercentage">진행률 76%</span>
-            <span id="progressStatusText">목표까지 7명 남음</span>
+            <span id="progressPercentage">진행률 0%</span>
+            <span id="progressStatusText">목표까지 30명 남음</span>
           </div>
         </div>
 
@@ -884,12 +884,20 @@
     <div id="successBox" class="success-card">
       <h3>🎉 신청이 완료되었습니다!</h3>
       <p id="successMessageText"></p>
+      <div id="excelAlertNotice" style="margin-top: 8px; font-size: 11px; color: #15803d; font-weight: 600;">
+        ※ 신청 정보가 학과 학생회 및 동아리 운영진 관리대장에 실시간으로 자동 집계되었습니다.
+      </div>
     </div>
 
     <!-- 화면 하단: 내 신청 내역 목록 카드 -->
     <section class="card">
-      <div class="step-header">
-        <h2 class="step-title">내 신청 내역</h2>
+      <div class="step-header" style="justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <h2 class="step-title">공동구매 신청 내역 & 운영진 관리</h2>
+        </div>
+        <button type="button" id="btnExportExcel" style="padding: 6px 12px; background-color: #1f3a6e; color: #fff; border: none; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">
+          📊 운영진 관리대장 엑셀(.csv) 받기
+        </button>
       </div>
       <div id="orderList" class="order-history-list">
         <div class="empty-orders">아직 신청한 내역이 없습니다. 위 폼을 작성해 신청해보세요!</div>
@@ -924,7 +932,7 @@
         ribColor: '#3b82c4',
         logoText: 'SOONGSIL',
         basePrice: 65000,
-        currentCount: 24,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -937,7 +945,7 @@
         ribColor: '#1a1d20',
         logoText: 'SSU 1897',
         basePrice: 66000,
-        currentCount: 28,
+        currentCount: 0,
         targetCount: 30
       },
 
@@ -952,7 +960,7 @@
         ribColor: '#3b82c4',
         logoText: 'SSU CSE',
         basePrice: 65000,
-        currentCount: 23,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -965,7 +973,7 @@
         ribColor: '#2563eb',
         logoText: 'SSU SW',
         basePrice: 65000,
-        currentCount: 19,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -978,7 +986,7 @@
         ribColor: '#0ea5e9',
         logoText: 'SSU AI',
         basePrice: 65000,
-        currentCount: 25,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -991,7 +999,7 @@
         ribColor: '#f59e0b',
         logoText: 'SSU ECE',
         basePrice: 65000,
-        currentCount: 18,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1004,7 +1012,7 @@
         ribColor: '#8b5cf6',
         logoText: 'G-MEDIA',
         basePrice: 65000,
-        currentCount: 21,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1017,7 +1025,7 @@
         ribColor: '#0284c7',
         logoText: 'SSU MM',
         basePrice: 65000,
-        currentCount: 14,
+        currentCount: 0,
         targetCount: 25
       },
 
@@ -1032,7 +1040,7 @@
         ribColor: '#10b981',
         logoText: 'SSU CBE',
         basePrice: 65000,
-        currentCount: 22,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1045,7 +1053,7 @@
         ribColor: '#64748b',
         logoText: 'SSU MECH',
         basePrice: 65000,
-        currentCount: 26,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1058,7 +1066,7 @@
         ribColor: '#94a3b8',
         logoText: 'SSU MSE',
         basePrice: 65000,
-        currentCount: 17,
+        currentCount: 0,
         targetCount: 25
       },
       {
@@ -1071,7 +1079,7 @@
         ribColor: '#eab308',
         logoText: 'SSU EE',
         basePrice: 65000,
-        currentCount: 20,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1084,7 +1092,7 @@
         ribColor: '#71717a',
         logoText: 'SSU ARCH',
         basePrice: 65000,
-        currentCount: 29,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1097,7 +1105,7 @@
         ribColor: '#38bdf8',
         logoText: 'SSU ISE',
         basePrice: 65000,
-        currentCount: 16,
+        currentCount: 0,
         targetCount: 25
       },
 
@@ -1112,7 +1120,7 @@
         ribColor: '#d97706',
         logoText: 'SSU BIZ',
         basePrice: 65000,
-        currentCount: 32,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1125,7 +1133,7 @@
         ribColor: '#f43f5e',
         logoText: 'SSU VENTURE',
         basePrice: 65000,
-        currentCount: 21,
+        currentCount: 0,
         targetCount: 25
       },
       {
@@ -1138,7 +1146,7 @@
         ribColor: '#64748b',
         logoText: 'SSU ACCT',
         basePrice: 65000,
-        currentCount: 15,
+        currentCount: 0,
         targetCount: 25
       },
       {
@@ -1151,7 +1159,7 @@
         ribColor: '#ca8a04',
         logoText: 'SSU FINANCE',
         basePrice: 65000,
-        currentCount: 24,
+        currentCount: 0,
         targetCount: 30
       },
 
@@ -1166,7 +1174,7 @@
         ribColor: '#b91c1c',
         logoText: 'SSU LAW',
         basePrice: 65000,
-        currentCount: 19,
+        currentCount: 0,
         targetCount: 25
       },
       {
@@ -1179,7 +1187,7 @@
         ribColor: '#2563eb',
         logoText: 'SSU I-LAW',
         basePrice: 65000,
-        currentCount: 13,
+        currentCount: 0,
         targetCount: 20
       },
 
@@ -1194,7 +1202,7 @@
         ribColor: '#78716c',
         logoText: 'SSU KOR',
         basePrice: 65000,
-        currentCount: 18,
+        currentCount: 0,
         targetCount: 25
       },
       {
@@ -1207,7 +1215,7 @@
         ribColor: '#059669',
         logoText: 'SSU ENG',
         basePrice: 65000,
-        currentCount: 23,
+        currentCount: 0,
         targetCount: 30
       },
 
@@ -1222,7 +1230,7 @@
         ribColor: '#0284c7',
         logoText: 'SSU MATH',
         basePrice: 65000,
-        currentCount: 21,
+        currentCount: 0,
         targetCount: 25
       },
       {
@@ -1235,7 +1243,7 @@
         ribColor: '#0d9488',
         logoText: 'SSU BIO',
         basePrice: 65000,
-        currentCount: 27,
+        currentCount: 0,
         targetCount: 30
       },
 
@@ -1250,7 +1258,7 @@
         ribColor: '#3b82c4',
         logoText: 'SSU PA',
         basePrice: 65000,
-        currentCount: 22,
+        currentCount: 0,
         targetCount: 30
       },
 
@@ -1265,7 +1273,7 @@
         ribColor: '#0284c7',
         logoText: 'SSU ECON',
         basePrice: 65000,
-        currentCount: 27,
+        currentCount: 0,
         targetCount: 30
       },
 
@@ -1280,7 +1288,7 @@
         ribColor: '#0038b8',
         logoText: 'YOURSSU',
         basePrice: 67000,
-        currentCount: 28,
+        currentCount: 0,
         targetCount: 30
       },
       {
@@ -1293,7 +1301,7 @@
         ribColor: '#38bdf8',
         logoText: 'SSCC 1978',
         basePrice: 66000,
-        currentCount: 22,
+        currentCount: 0,
         targetCount: 25
       },
       {
@@ -1306,7 +1314,7 @@
         ribColor: '#818cf8',
         logoText: 'DASOM',
         basePrice: 65000,
-        currentCount: 19,
+        currentCount: 0,
         targetCount: 25
       }
     ];
@@ -1650,24 +1658,77 @@
       successBox.scrollIntoView({ behavior: 'smooth' });
 
       // 공동구매 인원 증가
-      currentCounts[aff.id] = (currentCounts[aff.id] || aff.currentCount) + qty;
+      currentCounts[aff.id] = (currentCounts[aff.id] || 0) + qty;
       updateProgressDisplay(aff);
 
       // 내 신청 내역에 추가
       const newOrder = {
+        id: 'SSU_' + Date.now().toString().slice(-6),
+        affId: aff.id,
         name: nameVal,
         sid: sidVal,
+        phone: applicantPhone.value.trim() || '미기재',
         affName: aff.name,
         typeName: typeName,
         size: checkedSize,
         opts: selectedOpts.length > 0 ? selectedOpts.join(', ') : '없음',
         qty: qty,
         price: totalAmount,
-        time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
+        note: requestNote.value.trim() || '없음',
+        time: new Date().toLocaleString('ko-KR')
       };
       myApplicationsList.unshift(newOrder);
       renderOrderList();
     });
+
+    /* ========================================================================
+     * 엑셀 파일 저장 및 다운로드 기능 (학과 학생회 및 동아리 운영진용 관리대장)
+     * ======================================================================== */
+    function downloadOrdersExcel() {
+      if (myApplicationsList.length === 0) {
+        alert('다운로드할 공동구매 접수 내역이 없습니다.');
+        return;
+      }
+
+      // 엑셀에서 한글이 깨지지 않도록 UTF-8 BOM(\uFEFF) 추가 및 학생회 수납/배부 체크 컬럼 포함
+      let csvContent = '\uFEFF연번,접수번호,신청일시,소속,잠바종류,성명,학번,연락처,사이즈,추가옵션,수량,총결제금액(원),입금확인,배부확인,요청사항\n';
+
+      myApplicationsList.forEach((item, index) => {
+        csvContent += `"${index + 1}","${item.id}","${item.time}","${item.affName}","${item.typeName}","${item.name}","${item.sid}","${item.phone}","${item.size}","${item.opts}","${item.qty}","${item.price}","[  ] 미입금","[  ] 미수령","${item.note.replace(/"/g, '""')}"\n`;
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement('a');
+      const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      downloadLink.href = url;
+      downloadLink.download = `숭실대_잠바공구_학생회_운영진_관리대장_${dateStr}.csv`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('btnExportExcel').addEventListener('click', downloadOrdersExcel);
+
+    /* ========================================================================
+     * 신청 취소 기능 (공동구매 참여 인원 즉시 차감 및 목록 갱신)
+     * ======================================================================== */
+    window.cancelOrder = function(orderId) {
+      const target = myApplicationsList.find(o => o.id === orderId);
+      if (!target) return;
+
+      if (confirm(`[${target.affName} ${target.typeName}] 신청을 취소하시겠습니까?\n취소 시 해당 잠바의 공동구매 참여 인원에서 즉시 차감됩니다.`)) {
+        myApplicationsList = myApplicationsList.filter(o => o.id !== orderId);
+        if (currentCounts[target.affId] !== undefined) {
+          currentCounts[target.affId] = Math.max(0, currentCounts[target.affId] - target.qty);
+        }
+        const currentAff = getCurrentAffiliation();
+        updateProgressDisplay(currentAff);
+        renderOrderList();
+        alert('신청이 성공적으로 취소되었습니다.');
+      }
+    };
 
     function showError(msg) {
       errorBox.textContent = `⚠️ ${msg}`;
@@ -1681,7 +1742,7 @@
     }
 
     /* ========================================================================
-     * 8. 내 신청 내역 렌더링
+     * 8. 내 신청 내역 렌더링 (신청 취소 버튼 포함)
      * ======================================================================== */
     function renderOrderList() {
       if (myApplicationsList.length === 0) {
@@ -1700,6 +1761,10 @@
             <div>수량: <strong>${order.qty}벌</strong></div>
             <div>옵션: ${order.opts}</div>
             <div>접수 시간: ${order.time}</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:6px; border-top:1px solid #e2e8f0;">
+            <span style="font-size:10px; color:#94a3b8;">접수번호: ${order.id}</span>
+            <button type="button" onclick="cancelOrder('${order.id}')" style="background:#fff1f2; color:#e11d48; border:1px solid #fecdd3; border-radius:6px; padding:3px 10px; font-size:11px; font-weight:700; cursor:pointer;">신청 취소</button>
           </div>
         </div>
       `).join('');
